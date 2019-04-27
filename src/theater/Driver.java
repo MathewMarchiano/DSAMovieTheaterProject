@@ -21,9 +21,9 @@ public class Driver {
         System.out.print("Please enter information about the Shazam! Movie " +
                 "Theater:\n\tEnter the number of rows: ");
         rows = stdin.nextInt();
-        System.out.print("Enter the number of seats per row: ");
+        System.out.print("\tEnter the number of seats per row: ");
         seatsPerRow = stdin.nextInt();
-        System.out.print("Enter the price per ticket: ");
+        System.out.print("\tEnter the price per ticket: ");
         ticketPrice = stdin.nextDouble();
 
 
@@ -34,9 +34,9 @@ public class Driver {
         System.out.print("Please enter information about the Dumbo Movie " +
                 "Theater:\n\tEnter the number of rows: ");
         rows = stdin.nextInt();
-        System.out.print("Enter the number of seats per row: ");
+        System.out.print("\tEnter the number of seats per row: ");
         seatsPerRow = stdin.nextInt();
-        System.out.print("Enter the price per ticket: ");
+        System.out.print("\tEnter the price per ticket: ");
         ticketPrice = stdin.nextDouble();
 
         // Create the Dumbo Movie Theater

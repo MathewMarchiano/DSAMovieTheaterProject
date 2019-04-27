@@ -8,7 +8,8 @@ public class MovieHouse {
     private ListCDLSBased<Line> lines;
 
     public MovieHouse() {
-        // default
+        this.theaters = new ListCDLSBased<>();
+        this.lines = new ListCDLSBased<>();
     }
 
     public void addTheater(MovieTheater theater) {
