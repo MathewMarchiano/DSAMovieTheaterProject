@@ -1,5 +1,7 @@
 package theater;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -55,7 +57,8 @@ public class Driver {
 
             switch (selection) {
                 case 0:
-                    //
+                    // TODO
+                    // needs to report sales and kick out customers.
                     break;
                 case 1:
                     //
@@ -70,7 +73,7 @@ public class Driver {
                     //
                     break;
                 case 5:
-                    //
+                    house.getTheater("Shazam!").displaySeats();
                     break;
                 case 6:
                     //

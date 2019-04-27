@@ -20,4 +20,17 @@ public class MovieHouse {
         lines.add(lines.size(), line);
     }
 
+    public MovieTheater getTheater(String movieTitle) {
+        MovieTheater result = null;
+        int size = theaters.size();
+        for (int i = 0; i < size; i++) {
+            MovieTheater theater = theaters.get(i);
+            if (theater.getMovieTitle().equals(movieTitle)) {
+                result = theater;
+                break;
+            }
+        }
+        return result;
+    }
+
 }

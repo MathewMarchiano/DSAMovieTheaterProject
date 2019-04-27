@@ -26,4 +26,12 @@ public class MovieTheater {
         this.sales -= amount;
     }
 
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
+    public void displaySeats() {
+        // TODO
+    }
+
 }
