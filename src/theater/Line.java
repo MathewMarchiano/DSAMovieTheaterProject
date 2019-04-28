@@ -4,11 +4,13 @@ import structs.SLSQueue;
 
 public class Line {
 
+    private String name;
     private SLSQueue<Party> queue;
     private boolean isExpress;
     private int numParties;
 
-    public Line(boolean isExpress) {
+    public Line(String name, boolean isExpress) {
+        this.name = name;
         this.queue = new SLSQueue<>();
         this.isExpress = isExpress;
         numParties = 0;
@@ -27,6 +29,10 @@ public class Line {
     public int getNumParties()
     {
     	return numParties;
+    }
+
+    public String getName() {
+        return name;
     }
     
     public void addParty(Party party)
@@ -49,6 +55,14 @@ public class Line {
     public String toString()
     { 	
     	return queue.toString();
+    }
+
+    public Party getNextParty() {
+        Party result = null;
+        if (!queue.isEmpty()) {
+            result = queue.dequeue();
+        }
+        return result;
     }
 
 }

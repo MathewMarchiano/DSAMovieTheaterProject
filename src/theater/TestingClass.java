@@ -9,27 +9,12 @@ public class TestingClass {
 
     public static void main(String[] args) {
 
-        Seats seats = new Seats(10,5);
-        Party p1 = new Party("Scott", 2, false, "Movie");
-        Party p2 = new Party("Autumn", 1, false, "Movie");
-        Party p3 = new Party("Bree", 1, false, "Movie");
-        Party p4 = new Party("mini", 2, false, "Movie");
-        Party p5 = new Party("rob", 3, false, "Movie");
-        seats.seatParty(p1);
-        seats.seatParty(p2);
-        seats.seatParty(p3);
-        seats.seatParty(p4);
-        seats.seatParty(p5);
-        System.out.println(p1.getSeatNumber());
-        System.out.println(p2.getSeatNumber());
-        System.out.println(p3.getSeatNumber());
-        System.out.println(p4.getSeatNumber());
-        System.out.println(p5.getSeatNumber());
-        seats.removeParty("Bree");
-        seats.removeParty("Scott");
-        seats.removeParty("rob");
-        System.out.println(seats.toString());
-
+        MovieHouse mh = new MovieHouse();
+        mh.addLine(new Line("reg", false));
+        mh.addLine(new Line("exp", true));
+        mh.addPartyToLine(new Party("Scott", 5, false, "movie"));
+        mh.addPartyToLine(new Party("Scott2", 5, true, "movie"));
+        System.out.println(mh.getNextCustomer("reg"));
     }
 
 }

@@ -11,6 +11,7 @@ public class MovieTheater {
     private String movieTitle;
     private double ticketPrice;
     private double sales;
+    private int ticketsSold;
     private Seats seats;
     private int seatsPerRow;
     private ListCDLSBased<Party> seatedParties;
@@ -22,11 +23,17 @@ public class MovieTheater {
         this.seatsPerRow = seatsPerRow;
         this.ticketPrice = ticketPrice;
         this.seatedParties = new ListCDLSBased<>();
+        this.sales = 0;
+        this.ticketsSold = 0;
     }
     
     public double getSales()
     {
     	return sales;
+    }
+
+    public int getTicketsSold() {
+        return this.ticketsSold;
     }
 
     public void incrementSales(double amount) {
@@ -35,6 +42,10 @@ public class MovieTheater {
 
     public void decrementSales(double amount) {
         this.sales -= amount;
+    }
+
+    public void incrementTicketCount() {
+        this.ticketsSold++;
     }
 
     public String getMovieTitle() {

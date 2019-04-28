@@ -1,5 +1,7 @@
 package theater;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
+import structs.ListCDLSBased;
 import structs.MyListReferenceBased;
 
 import java.util.Iterator;
@@ -7,18 +9,20 @@ import java.util.Iterator;
 public class MovieHouse {
 
     private MyListReferenceBased<MovieTheater> theaters;
-    private MyListReferenceBased<Line> lines;
+    private ListCDLSBased<Line> lines;
     private int currentLine;
     private int currentExpressLine;
+    private Iterator<Line> iterator;
 
     public MovieHouse() {
         this.theaters = new MyListReferenceBased<>();
-        this.lines = new MyListReferenceBased<>();
+        this.lines = new ListCDLSBased<>();
         currentLine = 0;
         currentExpressLine = 0; // Will be set after lines are added (uses method below)
+        this.iterator = null;
     }
 
-    public MyListReferenceBased<Line> getLines() {
+    public ListCDLSBased<Line> getLines() {
         return lines;
     }
 
@@ -104,7 +108,7 @@ public class MovieHouse {
                 lines.get(index).addParty(party);
             } else // Place in express line
             {
-                System.out.println(currentExpressLine);
+                System.out.println("Party added to express line");
                 lines.get(currentExpressLine).addParty(party);
 
                 // Find next express line
@@ -115,6 +119,7 @@ public class MovieHouse {
         } else // Not eligible for express. Go to next regular line.
         {
 
+            System.out.println("Party added to regular line");
             lines.get(currentLine).addParty(party);
             do {
                 currentLine = (currentLine + 1) % lines.size();
@@ -154,6 +159,25 @@ public class MovieHouse {
             removed = iterator.next().removeParty(representative);
         }
         return removed;
+    }
+
+    // Assumes iterator has been created and continues
+    // with next iteration retrieving the next customer
+    public Party getNextCustomer() {
+        if (iterator == null) {
+            throw new ValueException("Iterator has not been initialized!");
+        }
+        return iterator.next().getNextParty();
+    }
+
+    // Builds an iterator starting with the line specified
+    public Party getNextCustomer(String lineName) {
+        this.iterator = lines.iterator();
+        Line result = iterator.next();
+        while (!result.getName().equals(lineName)) {
+            result = iterator.next();
+        }
+        return iterator.next().getNextParty();
     }
 
 }
