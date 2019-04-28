@@ -56,6 +56,14 @@ public class Seats {
         return result;
     }
 
+    private int computeRow(int index) {
+        return (index / seatsPerRow) + 1;
+    }
+
+    private int computeSeat(int index) {
+        return (index % seatsPerRow) + 1;
+    }
+
     public int getSize() {
         return size;
     }
@@ -70,18 +78,22 @@ public class Seats {
             int nextIndex = party.getSeatNumber();
             if (index - nextIndex != 0) {
                 for (int i = 0; i < nextIndex - index; i++) {
-                    sb.append("index " + i + " is empty\n");
+                    sb.append(String.format("Row %d seat %d is empty\n",
+                            computeRow(i), computeSeat(i)));
                 }
             }
+            String rep = party.getRepresentative();
             for (int i = nextIndex; i < nextIndex + party.getSize(); i++) {
-                sb.append("index " + i + " is owned by " + party.getRepresentative() + "\n");
+                sb.append(String.format("Row %d seat %d used by %s's " +
+                        "party.\n", computeRow(i), computeSeat(i), rep));
             }
             index = nextIndex + party.getSize();
         }
 
         // check to see if there are any seats on the end
         while (index < size) {
-            sb.append("index " + index + " is empty\n");
+            sb.append(String.format("Row %d seat %d is empty\n",
+                    computeRow(index), computeSeat(index)));
             index++;
         }
 
