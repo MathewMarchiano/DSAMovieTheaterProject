@@ -33,7 +33,7 @@ public class Seats {
                     party.setSeatNumber(result);
                     seats.add(seats.size(), party);
                 } else {
-                    prevEnd = (nextParty.getSeatNumber()+nextParty.getSize());
+                    prevEnd = (nextParty.getSeatNumber() + nextParty.getSize());
                 }
             }
             // if party wasn't assigned handle end case
@@ -56,4 +56,35 @@ public class Seats {
         return result;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public String toString() {
+
+        int index = 0;
+        Iterator<Party> iterator = seats.iterator();
+        StringBuilder sb = new StringBuilder();
+        while (iterator.hasNext()) {
+            Party party = iterator.next();
+            int nextIndex = party.getSeatNumber();
+            if (index - nextIndex != 0) {
+                for (int i = 0; i < nextIndex - index; i++) {
+                    sb.append("index " + i + " is empty\n");
+                }
+            }
+            for (int i = nextIndex; i < nextIndex + party.getSize(); i++) {
+                sb.append("index " + i + " is owned by " + party.getRepresentative() + "\n");
+            }
+            index = nextIndex + party.getSize();
+        }
+
+        // check to see if there are any seats on the end
+        while (index < size) {
+            sb.append("index " + index + " is empty\n");
+            index++;
+        }
+
+        return sb.toString();
+    }
 }

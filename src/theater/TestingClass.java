@@ -13,8 +13,8 @@ public class TestingClass {
         Party p1 = new Party("Scott", 2, false, "Movie");
         Party p2 = new Party("Autumn", 1, false, "Movie");
         Party p3 = new Party("Bree", 1, false, "Movie");
-        Party p4 = new Party("Bree", 1, false, "Movie");
-        Party p5 = new Party("Bree", 5, false, "Movie");
+        Party p4 = new Party("mini", 2, false, "Movie");
+        Party p5 = new Party("rob", 3, false, "Movie");
         seats.seatParty(p1);
         seats.seatParty(p2);
         seats.seatParty(p3);
@@ -25,6 +25,7 @@ public class TestingClass {
         System.out.println(p3.getSeatNumber());
         System.out.println(p4.getSeatNumber());
         System.out.println(p5.getSeatNumber());
+        System.out.println(seats.toString());
 
     }
 

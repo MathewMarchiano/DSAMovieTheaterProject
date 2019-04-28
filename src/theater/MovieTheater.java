@@ -4,6 +4,8 @@ import structs.ListArrayBased;
 import structs.ListCDLSBased;
 import structs.MyListReferenceBased;
 
+import java.util.Iterator;
+
 public class MovieTheater {
 
     private String movieTitle;
@@ -40,7 +42,7 @@ public class MovieTheater {
     }
 
     public void displaySeats() {
-        //
+        System.out.println(seats.toString());
     }
 
 }
