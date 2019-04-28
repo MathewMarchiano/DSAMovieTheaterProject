@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import structs.ListCDLSBased;
+import structs.MyListReferenceBased;
 
 public class Driver {
 
@@ -81,7 +82,7 @@ public class Driver {
                     //
                     break;
                 case 3:
-                    //
+                    customerLeaves(house);
                     break;
                 case 4:
                     displayLineInfo(house);
@@ -114,7 +115,7 @@ public class Driver {
     
     private static void displayLineInfo(MovieHouse house)
     {
-    	ListCDLSBased<Line> lines = house.getLines();
+    	MyListReferenceBased<Line> lines = house.getLines();
     	int numLines = lines.size();
     	int index = 0;
 
@@ -162,6 +163,21 @@ public class Driver {
     	
     	System.out.println("Customer " + name + " is in " +
     						"ticket line.");
+
+    }
+
+    private static void customerLeaves(MovieHouse house) {
+        System.out.print("Enter customer name: ");
+        String name = stdin.next().trim();
+        System.out.println(name);
+
+        boolean result = house.removePartyFromTheaters(name);
+        if (result) {
+            System.out.printf("Customer %s has left the Movie Theater\n",
+                    name);
+        } else {
+            System.out.println("This customer is not in the Movie Theater!");
+        }
 
     }
     

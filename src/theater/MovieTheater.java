@@ -45,4 +45,8 @@ public class MovieTheater {
         System.out.println(seats.toString());
     }
 
+    public boolean removeParty(String representative) {
+        return seats.removeParty(representative);
+    }
+
 }
