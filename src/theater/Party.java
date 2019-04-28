@@ -16,13 +16,18 @@ public class Party {
         this.desiredMovie = desiredMovie;
     }
     
+    public boolean getHasKids()
+    {
+    	return hasKids;
+    }
+    
     
 
     public String toString()
     {
     	String result = "";
     	
-    	result = "Customer " + representative + " part of " +
+    	result = "Customer " + representative + " party of " +
     			 size + " for " + desiredMovie + "\n";
     	
     	return result;

@@ -50,6 +50,9 @@ public class Driver {
         house.addLine(new Line(false));
         house.addLine(new Line(false));
         house.addLine(new Line(true));
+        house.addLine(new Line(true));
+        
+        house.setFirstExpressLine();
 
         boolean running = true;
 
@@ -72,7 +75,7 @@ public class Driver {
                 	running = false;
                     break;
                 case 1:
-                    //
+                    customerEnters(house);
                     break;
                 case 2:
                     //
@@ -123,7 +126,7 @@ public class Driver {
     		}
     		else
     		{
-    			System.out.println(lines.toString());
+    			System.out.println(lines.get(index).toString());
     		}
     		
     		index++;
@@ -155,11 +158,8 @@ public class Driver {
     		hasChild = true;
     	}
     	
+    	house.addPartyToLine(new Party(name, size, hasChild, movieName));
     	
-    	house.getLines().get(0).addParty(new Party(name, size, hasChild,
-                movieName));
-    	
-    	// TODO: Method for getting current line
     	System.out.println("Customer " + name + " is in " +
     						"ticket line.");
 
