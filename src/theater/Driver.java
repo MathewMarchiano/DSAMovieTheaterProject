@@ -156,7 +156,8 @@ public class Driver {
     	}
     	
     	
-    	house.getLines().get(0).addParty(new Party(name, size, hasChild, movieName));
+    	house.getLines().get(0).addParty(new Party(name, size, hasChild,
+                movieName));
     	
     	// TODO: Method for getting current line
     	System.out.println("Customer " + name + " is in " +
