@@ -6,7 +6,7 @@ public class MovieTheater {
 
     private String movieTitle;
     private double ticketPrice;
-    private int sales;
+    private double sales;
     private Party[][] seats;
     private ListCDLSBased<Party> seatedParties;
 
@@ -16,6 +16,11 @@ public class MovieTheater {
         this.seats = new Party[numOfRows][seatsPerRow];
         this.ticketPrice = ticketPrice;
         this.seatedParties = new ListCDLSBased<>();
+    }
+    
+    public double getSales()
+    {
+    	return sales;
     }
 
     public void incrementSales(double amount) {
