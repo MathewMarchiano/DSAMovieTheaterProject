@@ -11,5 +11,30 @@ public class Line {
         this.queue = new SLSQueue<>();
         this.isExpress = isExpress;
     }
+    
+    public SLSQueue<Party> getQueue()
+    {
+    	return queue;
+    }
+    
+    public boolean getIsExpress()
+    {
+    	return isExpress;
+    }
+    
+    public void addParty(Party party)
+    {
+    	queue.enqueue(party);
+    }
+    
+    public boolean isEmpty()
+    {
+    	return queue.isEmpty();
+    }
+    
+    public String toString()
+    { 	
+    	return queue.toString();
+    }
 
 }
