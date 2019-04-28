@@ -12,7 +12,7 @@ package structs;
 
 public class ListCDLSBased<T> implements ListInterface<T> {
 
-    private DNode<T> head;
+    protected DNode<T> head;
     private int numItems;
 
     public ListCDLSBased() {
@@ -158,6 +158,10 @@ public class ListCDLSBased<T> implements ListInterface<T> {
         } else {
             throw new ListIndexOutOfBoundsException("List index out of bounds on find");
         }
+
+    }
+
+    public java.util.Iterator iterator() {
 
     }
 

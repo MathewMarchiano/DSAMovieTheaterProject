@@ -9,14 +9,14 @@ public class MovieTheater {
     private String movieTitle;
     private double ticketPrice;
     private double sales;
-    private MyListReferenceBased<Party> seats;
+    private Seats seats;
     private int seatsPerRow;
     private ListCDLSBased<Party> seatedParties;
 
     public MovieTheater(String movieTitle, int numOfRows, int seatsPerRow,
                         double ticketPrice) {
         this.movieTitle = movieTitle;
-        this.seats = new MyListReferenceBased<>();
+        this.seats = new Seats(numOfRows*seatsPerRow, seatsPerRow);
         this.seatsPerRow = seatsPerRow;
         this.ticketPrice = ticketPrice;
         this.seatedParties = new ListCDLSBased<>();
