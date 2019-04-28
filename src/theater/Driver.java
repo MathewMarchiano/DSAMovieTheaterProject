@@ -90,7 +90,7 @@ public class Driver {
                     house.getTheater("Shazam!").displaySeats();
                     break;
                 case 6:
-                    //
+                    house.getTheater("Dumbo").displaySeats();
                     break;
                 case 7:
                     //

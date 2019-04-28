@@ -25,6 +25,9 @@ public class TestingClass {
         System.out.println(p3.getSeatNumber());
         System.out.println(p4.getSeatNumber());
         System.out.println(p5.getSeatNumber());
+        seats.removeParty("Bree");
+        seats.removeParty("Scott");
+        seats.removeParty("rob");
         System.out.println(seats.toString());
 
     }

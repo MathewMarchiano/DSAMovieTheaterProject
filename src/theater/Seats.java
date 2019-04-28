@@ -56,6 +56,21 @@ public class Seats {
         return result;
     }
 
+    public boolean removeParty(String representative) {
+        boolean removed = false;
+        int size = seats.size();
+        Iterator<Party> iterator = seats.iterator();
+        int i = 0;
+        while (i < size && !removed) {
+            if (iterator.next().getRepresentative().equals(representative)) {
+                seats.remove(i);
+                removed = true;
+            }
+            i++;
+        }
+        return removed;
+    }
+
     private int computeRow(int index) {
         return (index / seatsPerRow) + 1;
     }
