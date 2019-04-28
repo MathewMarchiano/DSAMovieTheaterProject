@@ -1,5 +1,7 @@
 package theater;
 
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
+
 public class Party {
 
     private String representative;
@@ -21,7 +23,9 @@ public class Party {
     	return hasKids;
     }
     
-    
+    public String getRepresentative() {
+        return representative;
+    }
 
     public String toString()
     {
@@ -33,6 +37,20 @@ public class Party {
     	return result;
     }
 
+    public int getSeatNumber() {
+        return seatNumber;
+    }
 
+    public void setSeatNumber(int seatNumber) {
+        if (seatNumber >= 0) {
+            this.seatNumber = seatNumber;
+        } else {
+            throw new ValueException("Seat number must be assigned a" +
+                    " positive number");
+        }
+    }
 
+    public int getSize() {
+        return size;
+    }
 }

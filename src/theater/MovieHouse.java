@@ -86,7 +86,7 @@ public class MovieHouse {
     			// Express line found. Get number of people in that line.
     			peopleInExpress = lines.get(expressIndex).getNumParties();
     			
-    			//Check numParties in express line against all regular lines
+    			// Check numParties in express line against all regular lines
     			while(!hasHalf && index < numLines)
         		{
         			if(lines.get(index).getIsExpress() == false) // Retrieve regular lines only

@@ -2,20 +2,21 @@ package theater;
 
 import structs.ListArrayBased;
 import structs.ListCDLSBased;
+import structs.MyListReferenceBased;
 
 public class MovieTheater {
 
     private String movieTitle;
     private double ticketPrice;
     private double sales;
-    private ListArrayBased<Party> seats;
+    private MyListReferenceBased<Party> seats;
     private int seatsPerRow;
     private ListCDLSBased<Party> seatedParties;
 
     public MovieTheater(String movieTitle, int numOfRows, int seatsPerRow,
                         double ticketPrice) {
         this.movieTitle = movieTitle;
-        this.seats = new ListArrayBased<>(numOfRows*seatsPerRow);
+        this.seats = new MyListReferenceBased<>();
         this.seatsPerRow = seatsPerRow;
         this.ticketPrice = ticketPrice;
         this.seatedParties = new ListCDLSBased<>();
@@ -39,7 +40,7 @@ public class MovieTheater {
     }
 
     public void displaySeats() {
-        // TODO
+        //
     }
 
 }

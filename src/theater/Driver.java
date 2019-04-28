@@ -47,11 +47,11 @@ public class Driver {
                 seatsPerRow, ticketPrice));
         
         // Add lines to the movie house
+        // Per instructions: 2 regular and 1 express lines
         house.addLine(new Line(false));
         house.addLine(new Line(false));
         house.addLine(new Line(true));
-        house.addLine(new Line(true));
-        
+
         house.setFirstExpressLine();
 
         boolean running = true;
