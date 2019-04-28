@@ -162,7 +162,7 @@ public class ListCDLSBased<T> implements ListInterface<T> {
     }
 
     public java.util.Iterator iterator() {
-
+        return new ListCDLSBasedIterator(this);
     }
 
 }
