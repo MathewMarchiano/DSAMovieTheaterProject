@@ -1,5 +1,6 @@
 package theater;
 
+import structs.ListArrayBased;
 import structs.ListCDLSBased;
 
 public class MovieTheater {
@@ -7,13 +8,15 @@ public class MovieTheater {
     private String movieTitle;
     private double ticketPrice;
     private double sales;
-    private Party[][] seats;
+    private ListArrayBased<Party> seats;
+    private int seatsPerRow;
     private ListCDLSBased<Party> seatedParties;
 
     public MovieTheater(String movieTitle, int numOfRows, int seatsPerRow,
                         double ticketPrice) {
         this.movieTitle = movieTitle;
-        this.seats = new Party[numOfRows][seatsPerRow];
+        this.seats = new ListArrayBased<>(numOfRows*seatsPerRow);
+        this.seatsPerRow = seatsPerRow;
         this.ticketPrice = ticketPrice;
         this.seatedParties = new ListCDLSBased<>();
     }
