@@ -67,7 +67,6 @@ public class Driver {
 
             switch (selection) {
                 case 0:
-                    house.close();
                     System.out.println("Everyone has been kicked out of the " +
                             "Movie House. Final Report:");
                     house.reportSales();

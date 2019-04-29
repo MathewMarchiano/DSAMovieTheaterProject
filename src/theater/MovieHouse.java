@@ -221,8 +221,6 @@ public class MovieHouse {
         return result;
     }
 
-    // Builds an iterator starting with the line specified
-
     /**
      * Gets the next customer that needs to be helped. It will start
      * helping customers based on the given lineName.
@@ -250,17 +248,6 @@ public class MovieHouse {
         } while (line != start);
 
         return result;
-    }
-
-    /**
-     * Closes the MovieHouse by removing everyone from all the MovieTheaters
-     */
-    public void close() {
-        Iterator<MovieTheater> iterator = theaters.iterator();
-        while (iterator.hasNext()) {
-            MovieTheater theater = iterator.next();
-            theater.close();
-        }
     }
 
 }
