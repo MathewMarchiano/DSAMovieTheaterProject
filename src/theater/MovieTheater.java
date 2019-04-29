@@ -36,16 +36,9 @@ public class MovieTheater {
         return this.ticketsSold;
     }
 
-    public void incrementSales(double amount) {
-        this.sales += amount;
-    }
-
-    public void decrementSales(double amount) {
-        this.sales -= amount;
-    }
-
-    public void incrementTicketCount() {
-        this.ticketsSold++;
+    public void incrementSale(int ticketQuantity) {
+        this.ticketsSold += ticketQuantity;
+        this.sales += ticketQuantity*ticketPrice;
     }
 
     public String getMovieTitle() {
@@ -62,6 +55,10 @@ public class MovieTheater {
 
     public int seatParty(Party party) {
         return seats.seatParty(party);
+    }
+
+    public void close() {
+        seats.close();
     }
 
 }

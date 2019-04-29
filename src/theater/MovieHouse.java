@@ -47,17 +47,18 @@ public class MovieHouse {
         return result;
     }
 
-    public double getTotalRevenue() {
-        double result = 0.0;
-        int index = 0;
-        int numTheaters = theaters.size();
-
-        while (index < numTheaters) {
-            result += theaters.get(0).getSales();
-            index++;
+    public void reportSales() {
+        StringBuilder sb = new StringBuilder();
+        Iterator<MovieTheater> iterator = theaters.iterator();
+        double sales = 0;
+        while (iterator.hasNext()) {
+            MovieTheater theater = iterator.next();
+            sb.append(String.format("%d have been sold for the %s Movie.\n",
+                    theater.getTicketsSold(), theater.getMovieTitle()));
+            sales += theater.getSales();
         }
-
-        return result;
+        sb.append(String.format("Total earnings: %f\n", sales));
+        System.out.println(sb);
     }
 
     /**
@@ -206,6 +207,14 @@ public class MovieHouse {
 
     public boolean hasIterator() {
         return iterator != null;
+    }
+
+    public void close() {
+        Iterator<MovieTheater> iterator = theaters.iterator();
+        while (iterator.hasNext()) {
+            MovieTheater theater = iterator.next();
+            theater.close();
+        }
     }
 
 }

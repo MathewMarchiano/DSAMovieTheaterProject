@@ -114,4 +114,11 @@ public class Seats {
 
         return sb.toString();
     }
+
+    public void close() {
+        Iterator<Party> iterator = seats.iterator();
+        while (iterator.hasNext()) {
+            removeParty(iterator.next().getRepresentative());
+        }
+    }
 }

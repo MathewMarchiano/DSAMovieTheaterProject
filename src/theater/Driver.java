@@ -66,12 +66,10 @@ public class Driver {
 
             switch (selection) {
                 case 0:
-                    // TODO
-                    // needs to report sales and kick out customers.
-                	System.out.println("The Wonderful Movie Theater who earned $" + 
-                				      house.getTotalRevenue() + " kicks out remaining "
-                				      + "customers and closes...\n" +
-                				      "Good Bye!");
+                    house.close();
+                    System.out.println("Everyone has been kicked out of the " +
+                            "Movie House. Final Report:");
+                    house.reportSales();
                 	running = false;
                     break;
                 case 1:
@@ -93,7 +91,7 @@ public class Driver {
                     house.getTheater("Dumbo").displaySeats();
                     break;
                 case 7:
-                    //
+                    house.reportSales();
                     break;
             }
         }
@@ -216,6 +214,7 @@ public class Driver {
                         System.out.printf("%s party of %d has been seated in " +
                                 "the %s Movie Theater", party.getRepresentative(),
                                 party.getSize(), otherMovieTitle);
+                        house.getTheater(otherMovieTitle).incrementSale(party.getSize());
                     }
                 } else {
                     System.out.println("Thank you have a nice day.");
@@ -224,6 +223,7 @@ public class Driver {
                 System.out.printf("%s party of %d has been seated in the " +
                         "%s Movie Theater", party.getRepresentative(),
                         party.getSize(), party.getDesiredMovie());
+                house.getTheater(party.getDesiredMovie()).incrementSale(party.getSize());
             }
         }
     }
