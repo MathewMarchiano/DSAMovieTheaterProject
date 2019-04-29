@@ -56,15 +56,17 @@ public class MovieHouse {
      * (Or null if no theater is playing movie with title)
      */
     public MovieTheater getTheater(String movieTitle) {
+
+
+        Iterator<MovieTheater> iterator = theaters.iterator();
         MovieTheater result = null;
-        int size = theaters.size();
-        for (int i = 0; i < size; i++) {
-            MovieTheater theater = theaters.get(i);
+        while (iterator.hasNext() && result == null) {
+            MovieTheater theater = iterator.next();
             if (theater.getMovieTitle().equals(movieTitle)) {
                 result = theater;
-                break;
             }
         }
+
         return result;
     }
 
