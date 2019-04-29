@@ -125,12 +125,14 @@ public class Driver {
         int index = 0;
 
         while (index < numLines) {
-            if (lines.get(index).isEmpty()) {
+            Line line = lines.get(index);
+            if (line.isEmpty()) {
                 System.out.println("No customers in line " + (index + 1));
             } else {
-                System.out.printf("Line #%d\n" +
-                        "----------\n", index + 1);
-                System.out.println(lines.get(index).toString());
+                String expressString = line.getIsExpress() ? "Express" : "";
+                System.out.printf("%s Line #%d\n" +
+                        "----------\n", expressString, index + 1);
+                System.out.println(line.toString());
             }
 
             index++;
