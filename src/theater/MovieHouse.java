@@ -105,7 +105,7 @@ public class MovieHouse {
         Line minLine = line;
         Line start = line;
         do {
-            if (!line.getIsExpress() || (party.getHasKids())) {
+            if ((!party.getHasKids()) || (line.getIsExpress() && party.getHasKids())) {
                 if (line.getNumParties() < minSize ||
                         minSize == -1) {
                     minSize = line.getNumParties();
