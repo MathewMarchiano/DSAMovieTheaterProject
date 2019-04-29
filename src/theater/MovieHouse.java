@@ -113,7 +113,7 @@ public class MovieHouse {
                 }
             }
             line = iterator.next();
-        } while (iterator.hasNext() || line != start);
+        } while (iterator.hasNext() && line != start);
 
         minLine.addParty(party);
     }
