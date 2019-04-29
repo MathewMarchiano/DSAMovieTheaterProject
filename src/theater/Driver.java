@@ -52,7 +52,7 @@ public class Driver {
         // Create the Dumbo Movie Theater
         house.addTheater(new MovieTheater("Dumbo", rows,
                 seatsPerRow, ticketPrice));
-        
+
         // Add lines to the movie house
         // Per instructions: 2 regular and 1 express lines
         house.addLine(new Line("Reg1", false));
@@ -76,7 +76,7 @@ public class Driver {
                     System.out.println("Everyone has been kicked out of the " +
                             "Movie House. Final Report:");
                     house.reportSales();
-                	running = false;
+                    running = false;
                     break;
                 case 1:
                     customerEnters(house);
@@ -118,73 +118,70 @@ public class Driver {
                 "6. Display seating chart for Dumbo Movie Theater\n" +
                 "7. Display number of tickets sold and total earnings\n");
     }
-    
-    private static void displayLineInfo(MovieHouse house)
-    {
-    	ListCDLSBased<Line> lines = house.getLines();
-    	int numLines = lines.size();
-    	int index = 0;
 
-    	while(index < numLines)
-    	{
-    		if(lines.get(index).isEmpty())
-    		{
-    			System.out.println("No customers in line " + (index + 1));
-    		}
-    		else
-    		{
-    			System.out.println(lines.get(index).toString());
-    		}
-    		
-    		index++;
-    	}
-    	
-    }
+    private static void displayLineInfo(MovieHouse house) {
+        ListCDLSBased<Line> lines = house.getLines();
+        int numLines = lines.size();
+        int index = 0;
 
+        while (index < numLines) {
+            if (lines.get(index).isEmpty()) {
+                System.out.println("No customers in line " + (index + 1));
+            } else {
+                System.out.println(lines.get(index).toString());
+            }
 
-    private static void customerEnters(MovieHouse house)
-    {
-    	System.out.print("Enter customer name: ");
-    	String name = stdin.next().trim();
-    	System.out.println(name);
-    	
-    	System.out.print("Enter party size: ");
-    	int size = stdin.nextInt();
-    	System.out.println(size);
-    	
-    	System.out.print("Enter movie name: ");
-    	String movieName = stdin.next().trim();
-    	System.out.println(movieName);
-    	
-    	System.out.print("Is a child 11 or younger in this part(Y/N)? ");
-    	String hasChildString = stdin.next().trim().toUpperCase();
-    	System.out.println(hasChildString);
-    	boolean hasChild = false;
-    	if(hasChildString.equals("Y"))
-    	{
-    		hasChild = true;
-    	}
-    	
-    	house.addPartyToLine(new Party(name, size, hasChild, movieName));
-    	
-    	System.out.println("Customer " + name + " is in " +
-    						"ticket line.");
+            index++;
+        }
 
     }
 
-    private static void customerLeaves(MovieHouse house) {
+
+    private static void customerEnters(MovieHouse house) {
         System.out.print("Enter customer name: ");
         String name = stdin.next().trim();
         System.out.println(name);
 
-        boolean result = house.removePartyFromTheaters(name);
-        if (result) {
-            System.out.printf("Customer %s has left the Movie Theater\n",
-                    name);
-        } else {
-            System.out.println("This customer is not in the Movie Theater!");
+        System.out.print("Enter party size: ");
+        int size = stdin.nextInt();
+        System.out.println(size);
+
+        System.out.print("Enter movie name: ");
+        String movieName = stdin.next().trim();
+        System.out.println(movieName);
+
+        System.out.print("Is a child 11 or younger in this part(Y/N)? ");
+        String hasChildString = stdin.next().trim().toUpperCase();
+        System.out.println(hasChildString);
+        boolean hasChild = false;
+        if (hasChildString.equals("Y")) {
+            hasChild = true;
         }
 
+        house.addPartyToLine(new Party(name, size, hasChild, movieName));
+
+        System.out.println("Customer " + name + " is in " +
+                "ticket line.");
+
+    }
+
+    private static void customerLeaves(MovieHouse house) {
+
+        if (house.areLinesEmpty()) {
+            System.out.println("No customers are in line right now.");
+        } else {
+            System.out.print("Enter customer name: ");
+            String name = stdin.next().trim();
+            System.out.println(name);
+
+            boolean result = house.removePartyFromTheaters(name);
+            if (result) {
+                System.out.printf("Customer %s has left the Movie Theater\n",
+                        name);
+            } else {
+                System.out.println("This customer is not in the Movie Theater!");
+            }
+        }
     }
 
     private static void customerBuys(MovieHouse house, boolean justOpened) {
@@ -197,7 +194,7 @@ public class Driver {
         } else {
             party = house.getNextCustomer();
         }
-        if (party == null){
+        if (party == null) {
             System.out.println("There are no customers in the movie house " +
                     "at the moment");
         } else {
@@ -221,7 +218,7 @@ public class Driver {
                                 "either. Have a nice day.");
                     } else {
                         System.out.printf("%s party of %d has been seated in " +
-                                "the %s Movie Theater", party.getRepresentative(),
+                                        "the %s Movie Theater", party.getRepresentative(),
                                 party.getSize(), otherMovieTitle);
                         house.getTheater(otherMovieTitle).incrementSale(party.getSize());
                     }
@@ -230,14 +227,12 @@ public class Driver {
                 }
             } else {
                 System.out.printf("%s party of %d has been seated in the " +
-                        "%s Movie Theater", party.getRepresentative(),
+                                "%s Movie Theater", party.getRepresentative(),
                         party.getSize(), party.getDesiredMovie());
                 house.getTheater(party.getDesiredMovie()).incrementSale(party.getSize());
             }
         }
     }
-    
-    
-    
-    
+
+
 }

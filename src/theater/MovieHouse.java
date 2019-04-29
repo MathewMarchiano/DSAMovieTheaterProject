@@ -289,4 +289,20 @@ public class MovieHouse {
         return result;
     }
 
+    /**
+     * Gets status if there is any customers in any line
+     * @return Returns true if there are no customers in line, false otherwise
+     */
+    public boolean areLinesEmpty() {
+        boolean result = true;
+        Iterator<Line> iterator = lines.iterator();
+        while (iterator.hasNext() && result) {
+            Line line = iterator.next();
+            if (!line.isEmpty()) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
 }
