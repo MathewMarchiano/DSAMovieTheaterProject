@@ -25,10 +25,13 @@ public class Driver {
         System.out.print("Please enter information about the Shazam! Movie " +
                 "Theater:\n\tEnter the number of rows: ");
         rows = stdin.nextInt();
+        System.out.println(rows);
         System.out.print("\tEnter the number of seats per row: ");
         seatsPerRow = stdin.nextInt();
+        System.out.println(seatsPerRow);
         System.out.print("\tEnter the price per ticket: ");
         ticketPrice = stdin.nextDouble();
+        System.out.println(ticketPrice);
 
 
         // Create the Shazam! Movie Theater
