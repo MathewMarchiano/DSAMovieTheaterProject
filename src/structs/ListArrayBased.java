@@ -12,16 +12,12 @@ package structs;
 
 public class ListArrayBased<T> implements ListInterface<T> {
 
+    private static final int MAX_LIST = 3;
     protected T[] items;
     protected int numItems;
 
     public ListArrayBased() {
-        items = (T[]) new Object[3];
-        numItems = 0;
-    }
-
-    public ListArrayBased(int size) {
-        items = (T[]) new Object[size];
+        items = (T[]) new Object[MAX_LIST];
         numItems = 0;
     }
 
@@ -34,8 +30,7 @@ public class ListArrayBased<T> implements ListInterface<T> {
     }
 
     public void removeAll() {
-        int size = items.length;
-        items = (T[]) new Object[size];
+        items = (T[]) new Object[MAX_LIST];
         numItems = 0;
     }
 

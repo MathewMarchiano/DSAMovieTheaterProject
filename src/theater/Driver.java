@@ -25,10 +25,13 @@ public class Driver {
         System.out.print("Please enter information about the Shazam! Movie " +
                 "Theater:\n\tEnter the number of rows: ");
         rows = stdin.nextInt();
+        System.out.println(rows);
         System.out.print("\tEnter the number of seats per row: ");
         seatsPerRow = stdin.nextInt();
+        System.out.println(seatsPerRow);
         System.out.print("\tEnter the price per ticket: ");
         ticketPrice = stdin.nextDouble();
+        System.out.println(ticketPrice);
 
 
         // Create the Shazam! Movie Theater
@@ -38,15 +41,18 @@ public class Driver {
         System.out.print("Please enter information about the Dumbo Movie " +
                 "Theater:\n\tEnter the number of rows: ");
         rows = stdin.nextInt();
+        System.out.println(rows);
         System.out.print("\tEnter the number of seats per row: ");
         seatsPerRow = stdin.nextInt();
+        System.out.println(seatsPerRow);
         System.out.print("\tEnter the price per ticket: ");
         ticketPrice = stdin.nextDouble();
+        System.out.println(ticketPrice);
 
         // Create the Dumbo Movie Theater
         house.addTheater(new MovieTheater("Dumbo", rows,
                 seatsPerRow, ticketPrice));
-        
+
         // Add lines to the movie house
         // Per instructions: 2 regular and 1 express lines
         house.addLine(new Line("Reg1", false));
@@ -112,27 +118,26 @@ public class Driver {
                 "6. Display seating chart for Dumbo Movie Theater\n" +
                 "7. Display number of tickets sold and total earnings\n");
     }
-    
-    private static void displayLineInfo(MovieHouse house)
-    {
-    	ListCDLSBased<Line> lines = house.getLines();
-    	int numLines = lines.size();
-    	int index = 0;
 
-    	while(index < numLines)
-    	{
-    		if(lines.get(index).isEmpty())
-    		{
-    			System.out.println("No customers in line " + (index + 1));
-    		}
-    		else
-    		{
-    			System.out.println(lines.get(index).toString());
-    		}
-    		
-    		index++;
-    	}
-    	
+    private static void displayLineInfo(MovieHouse house) {
+        ListCDLSBased<Line> lines = house.getLines();
+        int numLines = lines.size();
+        int index = 0;
+
+        while (index < numLines) {
+            Line line = lines.get(index);
+            if (line.isEmpty()) {
+                System.out.println("No customers in line " + (index + 1));
+            } else {
+                String expressString = line.getIsExpress() ? "Express" : "";
+                System.out.printf("\n%s Line #%d\n" +
+                        "----------\n", expressString, index + 1);
+                System.out.println(line.toString());
+            }
+
+            index++;
+        }
+
     }
 
 
@@ -168,35 +173,38 @@ public class Driver {
     	
     	System.out.println("Customer " + name + " is in " +
     						"ticket line.");
-
     }
-
+  
     private static void customerLeaves(MovieHouse house) {
-        System.out.print("Enter customer name: ");
-        String name = stdin.next().trim();
-        System.out.println(name);
 
-        boolean result = house.removePartyFromTheaters(name);
-        if (result) {
-            System.out.printf("Customer %s has left the Movie Theater\n",
-                    name);
+        if (house.areLinesEmpty()) {
+            System.out.println("No customers are in line right now.");
         } else {
-            System.out.println("This customer is not in the Movie Theater!");
-        }
+            System.out.print("Enter customer name: ");
+            String name = stdin.next().trim();
+            System.out.println(name);
 
+            boolean result = house.removePartyFromTheaters(name);
+            if (result) {
+                System.out.printf("Customer %s has left the Movie Theater\n",
+                        name);
+            } else {
+                System.out.println("This customer is not in the Movie Theater!");
+            }
+        }
     }
 
     private static void customerBuys(MovieHouse house, boolean justOpened) {
         Party party = null;
         if (justOpened) {
-            System.out.println("Which line would you like to serve first? ");
+            System.out.print("Which line would you like to serve first? ");
             String lineName = stdin.next().trim();
             System.out.println(lineName);
             party = house.getNextCustomer(lineName);
         } else {
             party = house.getNextCustomer();
         }
-        if (party == null){
+        if (party == null) {
             System.out.println("There are no customers in the movie house " +
                     "at the moment");
         } else {
@@ -220,7 +228,7 @@ public class Driver {
                                 "either. Have a nice day.");
                     } else {
                         System.out.printf("%s party of %d has been seated in " +
-                                "the %s Movie Theater", party.getRepresentative(),
+                                        "the %s Movie Theater\n", party.getRepresentative(),
                                 party.getSize(), otherMovieTitle);
                         house.getTheater(otherMovieTitle).incrementSale(party.getSize());
                     }
@@ -229,14 +237,10 @@ public class Driver {
                 }
             } else {
                 System.out.printf("%s party of %d has been seated in the " +
-                        "%s Movie Theater", party.getRepresentative(),
+                                "%s Movie Theater\n", party.getRepresentative(),
                         party.getSize(), party.getDesiredMovie());
                 house.getTheater(party.getDesiredMovie()).incrementSale(party.getSize());
             }
         }
     }
-    
-    
-    
-    
 }

@@ -94,107 +94,25 @@ public class MovieHouse {
      *
      * @param party Party to add to line.
      */
-    /**
-     * Adds a party to the appropriate line.
-     *
-     * @param party Party to add to line.
-     */
     public void addPartyToLine(Party party) {
-        // Check if party is eligible for express
-        if (party.getHasKids()) {
-            // Check if regular lines have 1/2 people of express
-            boolean hasHalf = false;
-            int index = 0;
-            int expressIndex = 0;
-            int numLines = lines.size();
-            int peopleInExpress = 0;
 
-            // Check ALL potential express lines
-            while (!hasHalf && expressIndex < numLines) {
-                // Find express line if not pointing to one
-                while (lines.get(expressIndex).getIsExpress() != true) {
-                    expressIndex++;
+        int minSize = -1;
+        Iterator<Line> iterator = lines.iterator();
+        Line line = iterator.next();
+        Line minLine = line;
+        Line start = line;
+        do {
+            if ((!party.getHasKids()) || (line.getIsExpress() && party.getHasKids())) {
+                if (line.getNumParties() < minSize ||
+                        minSize == -1) {
+                    minSize = line.getNumParties();
+                    minLine = line;
                 }
-
-                // Express line found. Get number of people in that line.
-                peopleInExpress = lines.get(expressIndex).getNumParties();
-
-                // Check numParties in express line against all regular lines
-                while (!hasHalf && index < numLines) {
-                    if (lines.get(index).getIsExpress() == false) // Retrieve regular lines only
-                    {
-                        if (lines.get(index).getNumParties() <= peopleInExpress * .5) {
-                            hasHalf = true; // Better to place in regular line. Stop checking.
-                        } else {
-                            index++;
-                        }
-                    } else {
-                        index++;
-                    }
-
-                }
-
-                expressIndex++;
             }
+            line = iterator.next();
+        } while (iterator.hasNext() && line != start);
 
-            if (hasHalf) // Place in regular line
-            {
-                lines.get(index).addParty(party);
-            } else // Place in express line
-            {
-
-                lines.get(currentExpressLine).addParty(party);
-
-                // Find next express shortest line
-                int shortestIndex = (currentLine + 1) % lines.size();
-                int shortestPeople = lines.get(shortestIndex).getNumParties();
-                index = 0;
-                numLines = lines.size();
-
-                while(index < numLines)
-                {
-                    // Check only express lines
-                    if(lines.get(index).getIsExpress() == true && lines.get(index).getNumParties() < shortestPeople)
-                    {
-                        shortestIndex = index;
-                        shortestPeople = lines.get(shortestIndex).getNumParties();
-                    }
-
-                    index++;
-                }
-
-                // Shortest express line found
-                currentExpressLine = shortestIndex;
-            }
-        } else // Not eligible for express. Go to next regular line.
-        {
-            // Add to line
-            lines.get(currentLine).addParty(party);
-
-            // Find next shortest line
-            int shortestIndex = (currentLine + 1) % lines.size();
-            int shortestPeople = lines.get(shortestIndex).getNumParties();
-            int index = 0;
-            int numLines = lines.size();
-
-            while(index < numLines)
-            {
-                // Check only regular lines
-                if(lines.get(index).getIsExpress() == false && lines.get(index).getNumParties() < shortestPeople)
-                {
-                    shortestIndex = index;
-                    shortestPeople = lines.get(shortestIndex).getNumParties();
-                }
-
-                index++;
-            }
-
-            // Shortest line found
-            currentLine = shortestIndex;
-        }
-        
-        // Add to list of names currently in line
-        names.add(names.size(), party.getRepresentative());
+        minLine.addParty(party);
     }
 
     /**
@@ -292,6 +210,7 @@ public class MovieHouse {
         } while (line != start);
 
         return result;
+
     }
     
     /**
@@ -317,4 +236,26 @@ public class MovieHouse {
     	return duplicate;
     }
 
+
+    }
+
+    /**
+     * Gets status if there is any customers in any line
+     * @return Returns true if there are no customers in line, false otherwise
+     */
+    public boolean areLinesEmpty() {
+        boolean result = true;
+        Iterator<Line> iterator = lines.iterator();
+        if (iterator.hasNext()) {
+            Line line = iterator.next();
+            Line start = line;
+            do {
+                if (!line.isEmpty()) {
+                    result = false;
+                }
+                line = iterator.next();
+            } while (line != start && result);
+        }
+        return result;
+    }
 }

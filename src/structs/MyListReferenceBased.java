@@ -13,7 +13,7 @@ package structs;
 public class MyListReferenceBased<T> implements ListInterface<T>
 {
 
-    private Node<T> head;
+    protected Node<T> head;
 
     public MyListReferenceBased()
     {
@@ -138,6 +138,10 @@ public class MyListReferenceBased<T> implements ListInterface<T>
 
         return sb.toString();
 
+    }
+
+    public java.util.Iterator iterator() {
+        return new MyListReferencedBasedIterator(this);
     }
 
 }
