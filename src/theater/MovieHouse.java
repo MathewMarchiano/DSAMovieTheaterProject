@@ -296,11 +296,15 @@ public class MovieHouse {
     public boolean areLinesEmpty() {
         boolean result = true;
         Iterator<Line> iterator = lines.iterator();
-        while (iterator.hasNext() && result) {
+        if (iterator.hasNext()) {
             Line line = iterator.next();
-            if (!line.isEmpty()) {
-                result = false;
-            }
+            Line start = line;
+            do {
+                if (!line.isEmpty()) {
+                    result = false;
+                }
+                line = iterator.next();
+            } while (line != start && result);
         }
         return result;
     }
