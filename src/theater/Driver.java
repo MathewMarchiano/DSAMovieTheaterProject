@@ -190,7 +190,7 @@ public class Driver {
     private static void customerBuys(MovieHouse house, boolean justOpened) {
         Party party = null;
         if (justOpened) {
-            System.out.println("Which line would you like to serve first? ");
+            System.out.print("Which line would you like to serve first? ");
             String lineName = stdin.next().trim();
             System.out.println(lineName);
             party = house.getNextCustomer(lineName);
