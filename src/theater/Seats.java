@@ -4,21 +4,36 @@ import structs.*;
 
 import java.util.Iterator;
 
+/**
+ * The Seats represents seats in a MovieTheater that can be claimed by
+ * Parties. The Seats class is efficient in that it only stores in memory
+ * the first seat occupied by the Party. It uses the size of the Party class
+ * to determine if seats are available.
+ */
 public class Seats {
 
     private int size;
     private int seatsPerRow;
     private MyListReferenceBased<Party> seats;
 
+    /**
+     * Seats constructor
+     * @param size The number of seats in Seats
+     * @param seatsPerRow The number of seats per row
+     */
     public Seats(int size, int seatsPerRow) {
         this.size = size;
         this.seatsPerRow = seatsPerRow;
         this.seats = new MyListReferenceBased<>();
     }
 
-    // if party can be seated it will return the index of the first seat
-    // of where they were placed. otherwise it will return -1 if they
-    // cannot be seated.
+    /**
+     * Attempts to seat a Party. Returns index of where the Party's seating
+     * starts if the Party was able to be seated. Returns -1 otherwise
+     * @param party The Party to try to seat
+     * @return Index of seat at the start of Party's seating. -1 if Party
+     * could not be seated
+     */
     public int seatParty(Party party) {
 
         int result = -1;
@@ -56,6 +71,12 @@ public class Seats {
         return result;
     }
 
+    /**
+     * Removes Party (if present) from seating. Returns true if party was found
+     * and removed. Returns false if the Party was not present
+     * @param representative The name of the person representing the Party
+     * @return True if party was found and removed, false otherwise
+     */
     public boolean removeParty(String representative) {
         boolean removed = false;
         int size = seats.size();
@@ -71,18 +92,36 @@ public class Seats {
         return removed;
     }
 
+    /**
+     * Gets the row the seat's index is in
+     * @param index The seat's index
+     * @return The index of the row that seat's index is in
+     */
     private int computeRow(int index) {
         return (index / seatsPerRow) + 1;
     }
 
+    /**
+     * Gets the seat number (relative to the row) belonging to the seat's index
+     * @param index The seat's index
+     * @return The seat number (relative to the row it is in)
+     */
     private int computeSeat(int index) {
         return (index % seatsPerRow) + 1;
     }
 
+    /**
+     * Returns the total number of seats in Seats
+     * @return The number of seats
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Return string containing each seat and its availability
+     * @return String representation of Seats
+     */
     public String toString() {
 
         int index = 0;
