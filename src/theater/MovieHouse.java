@@ -149,11 +149,9 @@ public class MovieHouse {
                 index = 0;
                 numLines = lines.size();
 
-                while(index < numLines)
-                {
+                while (index < numLines) {
                     // Check only express lines
-                    if(lines.get(index).getIsExpress() == true && lines.get(index).getNumParties() < shortestPeople)
-                    {
+                    if (lines.get(index).getIsExpress() == true && lines.get(index).getNumParties() < shortestPeople) {
                         shortestIndex = index;
                         shortestPeople = lines.get(shortestIndex).getNumParties();
                     }
@@ -175,11 +173,9 @@ public class MovieHouse {
             int index = 0;
             int numLines = lines.size();
 
-            while(index < numLines)
-            {
+            while (index < numLines) {
                 // Check only regular lines
-                if(lines.get(index).getIsExpress() == false && lines.get(index).getNumParties() < shortestPeople)
-                {
+                if (lines.get(index).getIsExpress() == false && lines.get(index).getNumParties() < shortestPeople) {
                     shortestIndex = index;
                     shortestPeople = lines.get(shortestIndex).getNumParties();
                 }
