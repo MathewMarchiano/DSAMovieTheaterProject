@@ -70,7 +70,7 @@ public class SLSQueue<T> implements QueueInterface<T> {
         StringBuilder sb = new StringBuilder();
         Node<T> curr = this.front;
         while (curr != null) {
-            sb.append(curr.getItem().toString() + " ");
+            sb.append(curr.getItem().toString() + " \n");
             curr = curr.getNext();
         }
 
