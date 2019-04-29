@@ -1,6 +1,5 @@
 package theater;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import structs.ListCDLSBased;
 import structs.MyListReferenceBased;
 
@@ -14,6 +13,9 @@ public class MovieHouse {
     private int currentExpressLine;
     private Iterator<Line> iterator;
 
+    /**
+     * MovieHouse constructor
+     */
     public MovieHouse() {
         this.theaters = new MyListReferenceBased<>();
         this.lines = new ListCDLSBased<>();
@@ -22,18 +24,37 @@ public class MovieHouse {
         this.iterator = null;
     }
 
+    /**
+     * Gets the Lines in the MovieHouse
+     * @return The Lines of the MovieHouse
+     */
     public ListCDLSBased<Line> getLines() {
         return lines;
     }
 
+    /**
+     * Add a Theater to the MovieHouse
+     * @param theater The Theater to add
+     */
     public void addTheater(MovieTheater theater) {
         this.theaters.add(theaters.size(), theater);
     }
 
+    /**
+     * Add a Line to the MovieHouse
+     * @param line The Line to add
+     */
     public void addLine(Line line) {
         lines.add(lines.size(), line);
     }
 
+    /**
+     * Get MovieTheater by the movie's title. Returns null if there is not
+     * a MovieTheater playing a movie with this title.
+     * @param movieTitle The title of the movie
+     * @return The Theater playing a movie with the given title.
+     * (Or null if no theater is playing movie with title)
+     */
     public MovieTheater getTheater(String movieTitle) {
         MovieTheater result = null;
         int size = theaters.size();
@@ -47,6 +68,9 @@ public class MovieHouse {
         return result;
     }
 
+    /**
+     * Prints out a summary of the sales from all MovieTheaters.
+     */
     public void reportSales() {
         StringBuilder sb = new StringBuilder();
         Iterator<MovieTheater> iterator = theaters.iterator();
@@ -153,6 +177,14 @@ public class MovieHouse {
         currentExpressLine = result;
     }
 
+    /**
+     * Iterates through all MovieTheaters until it finds the given Party
+     * to remove. Returns true if the Party was found and removed.
+     * Returns false if the Party was not found and not removed.
+     *
+     * @param representative The name of the Party's representative to remove
+     * @return True if the party was found and removed. False otherwise
+     */
     public boolean removePartyFromTheaters(String representative) {
         Iterator<MovieTheater> iterator = theaters.iterator();
         boolean removed = false;
@@ -162,11 +194,17 @@ public class MovieHouse {
         return removed;
     }
 
-    // Assumes iterator has been created and continues
-    // with next iteration retrieving the next customer
+    /**
+     * Gets the next customer that needs to be helped. It will start
+     * helping customers based on the first line that was added.
+     * @return The next Party that needs to be helped. If no Parties are in
+     * any of the lines it will return null.
+     */
     public Party getNextCustomer() {
         if (iterator == null) {
-            throw new ValueException("Iterator has not been initialized!");
+            // Since no line was specified MovieHouse will just
+            // start with the first line that was added.
+            this.iterator = lines.iterator();
         }
         Line line = iterator.next();
         Line start = line;
@@ -184,6 +222,15 @@ public class MovieHouse {
     }
 
     // Builds an iterator starting with the line specified
+
+    /**
+     * Gets the next customer that needs to be helped. It will start
+     * helping customers based on the given lineName.
+     * @param lineName The name of the line where MovieHouse should start
+     *                 serving customers.
+     * @return The next Party that needs to be helped. If no Parties are in
+     * any of the lines it will return null.
+     */
     public Party getNextCustomer(String lineName) {
         this.iterator = lines.iterator();
         Line line = iterator.next();
@@ -205,10 +252,9 @@ public class MovieHouse {
         return result;
     }
 
-    public boolean hasIterator() {
-        return iterator != null;
-    }
-
+    /**
+     * Closes the MovieHouse by removing everyone from all the MovieTheaters
+     */
     public void close() {
         Iterator<MovieTheater> iterator = theaters.iterator();
         while (iterator.hasNext()) {

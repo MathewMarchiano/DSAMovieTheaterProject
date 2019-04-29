@@ -15,6 +15,7 @@ public class Driver {
     public static void main(String[] args) {
 
         MovieHouse house = new MovieHouse();
+        boolean justOpened = true;
 
         System.out.println("Welcome to the Movie Theater System!\n" +
                 "Tonight's feature are: \"Shazam!\" and \"Dumbo\"\n");
@@ -76,7 +77,10 @@ public class Driver {
                     customerEnters(house);
                     break;
                 case 2:
-                    customerBuys(house);
+                    customerBuys(house, justOpened);
+                    if (justOpened) {
+                        justOpened = false;
+                    }
                     break;
                 case 3:
                     customerLeaves(house);
@@ -178,9 +182,9 @@ public class Driver {
 
     }
 
-    private static void customerBuys(MovieHouse house) {
+    private static void customerBuys(MovieHouse house, boolean justOpened) {
         Party party = null;
-        if (!house.hasIterator()) {
+        if (justOpened) {
             System.out.println("Which line would you like to serve first? ");
             String lineName = stdin.next().trim();
             System.out.println(lineName);
