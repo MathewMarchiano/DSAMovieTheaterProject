@@ -129,7 +129,7 @@ public class Driver {
                 System.out.println("No customers in line " + (index + 1));
             } else {
                 System.out.printf("Line #%d\n" +
-                        "----------", index + 1);
+                        "----------\n", index + 1);
                 System.out.println(lines.get(index).toString());
             }
 
