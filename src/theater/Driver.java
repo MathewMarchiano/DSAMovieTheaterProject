@@ -128,6 +128,8 @@ public class Driver {
             if (lines.get(index).isEmpty()) {
                 System.out.println("No customers in line " + (index + 1));
             } else {
+                System.out.printf("Line #%d\n" +
+                        "----------", index + 1);
                 System.out.println(lines.get(index).toString());
             }
 
