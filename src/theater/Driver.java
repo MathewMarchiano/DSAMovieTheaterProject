@@ -220,7 +220,7 @@ public class Driver {
                                 "either. Have a nice day.");
                     } else {
                         System.out.printf("%s party of %d has been seated in " +
-                                        "the %s Movie Theater", party.getRepresentative(),
+                                        "the %s Movie Theater\n", party.getRepresentative(),
                                 party.getSize(), otherMovieTitle);
                         house.getTheater(otherMovieTitle).incrementSale(party.getSize());
                     }
@@ -229,7 +229,7 @@ public class Driver {
                 }
             } else {
                 System.out.printf("%s party of %d has been seated in the " +
-                                "%s Movie Theater", party.getRepresentative(),
+                                "%s Movie Theater\n", party.getRepresentative(),
                         party.getSize(), party.getDesiredMovie());
                 house.getTheater(party.getDesiredMovie()).incrementSale(party.getSize());
             }
