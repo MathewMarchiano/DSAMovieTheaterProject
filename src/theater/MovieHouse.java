@@ -92,6 +92,11 @@ public class MovieHouse {
      *
      * @param party Party to add to line.
      */
+    /**
+     * Adds a party to the appropriate line.
+     *
+     * @param party Party to add to line.
+     */
     public void addPartyToLine(Party party) {
         // Check if party is eligible for express
         if (party.getHasKids()) {
@@ -135,23 +140,55 @@ public class MovieHouse {
                 lines.get(index).addParty(party);
             } else // Place in express line
             {
-                System.out.println("Party added to express line");
+
                 lines.get(currentExpressLine).addParty(party);
 
-                // Find next express line
-                do {
-                    currentExpressLine = (currentExpressLine + 1) % lines.size();
-                } while (lines.get(currentExpressLine).getIsExpress() == false);
+                // Find next express shortest line
+                int shortestIndex = (currentLine + 1) % lines.size();
+                int shortestPeople = lines.get(shortestIndex).getNumParties();
+                index = 0;
+                numLines = lines.size();
+
+                while(index < numLines)
+                {
+                    // Check only express lines
+                    if(lines.get(index).getIsExpress() == true && lines.get(index).getNumParties() < shortestPeople)
+                    {
+                        shortestIndex = index;
+                        shortestPeople = lines.get(shortestIndex).getNumParties();
+                    }
+
+                    index++;
+                }
+
+                // Shortest express line found
+                currentExpressLine = shortestIndex;
             }
         } else // Not eligible for express. Go to next regular line.
         {
-
-            System.out.println("Party added to regular line");
+            // Add to line
             lines.get(currentLine).addParty(party);
-            do {
-                currentLine = (currentLine + 1) % lines.size();
-            } while (lines.get(currentLine).getIsExpress() == true);
 
+            // Find next shortest line
+            int shortestIndex = (currentLine + 1) % lines.size();
+            int shortestPeople = lines.get(shortestIndex).getNumParties();
+            int index = 0;
+            int numLines = lines.size();
+
+            while(index < numLines)
+            {
+                // Check only regular lines
+                if(lines.get(index).getIsExpress() == false && lines.get(index).getNumParties() < shortestPeople)
+                {
+                    shortestIndex = index;
+                    shortestPeople = lines.get(shortestIndex).getNumParties();
+                }
+
+                index++;
+            }
+
+            // Shortest line found
+            currentLine = shortestIndex;
         }
     }
 
