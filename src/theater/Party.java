@@ -53,4 +53,8 @@ public class Party {
     public int getSize() {
         return size;
     }
+
+    public String getDesiredMovie() {
+        return desiredMovie;
+    }
 }

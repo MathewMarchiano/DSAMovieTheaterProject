@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import structs.ListCDLSBased;
-import structs.MyListReferenceBased;
 
 public class Driver {
 
@@ -79,7 +78,7 @@ public class Driver {
                     customerEnters(house);
                     break;
                 case 2:
-                    //
+                    customerBuys(house);
                     break;
                 case 3:
                     customerLeaves(house);
@@ -179,6 +178,54 @@ public class Driver {
             System.out.println("This customer is not in the Movie Theater!");
         }
 
+    }
+
+    private static void customerBuys(MovieHouse house) {
+        Party party = null;
+        if (!house.hasIterator()) {
+            System.out.println("Which line would you like to serve first? ");
+            String lineName = stdin.next().trim();
+            System.out.println(lineName);
+            party = house.getNextCustomer(lineName);
+        } else {
+            party = house.getNextCustomer();
+        }
+        if (party == null){
+            System.out.println("There are no customers in the movie house " +
+                    "at the moment");
+        } else {
+            MovieTheater theater = house.getTheater(party.getDesiredMovie());
+            int seatIndex = theater.seatParty(party);
+            if (seatIndex == -1) {
+                System.out.println("Movie cannot seat your party.\n" +
+                        "Did you want to watch the other movie?");
+                String response = stdin.next().trim().toUpperCase();
+                if (response.equals("Y")) {
+                    String otherMovieTitle;
+                    if (party.getDesiredMovie().equals("Dumbo")) {
+                        otherMovieTitle = "Shazam!";
+                    } else {
+                        otherMovieTitle = "Dumbo";
+                    }
+                    seatIndex = house.getTheater(otherMovieTitle)
+                            .seatParty(party);
+                    if (seatIndex == -1) {
+                        System.out.println("Sorry we could not seat you there " +
+                                "either. Have a nice day.");
+                    } else {
+                        System.out.printf("%s party of %d has been seated in " +
+                                "the %s Movie Theater", party.getRepresentative(),
+                                party.getSize(), otherMovieTitle);
+                    }
+                } else {
+                    System.out.println("Thank you have a nice day.");
+                }
+            } else {
+                System.out.printf("%s party of %d has been seated in the " +
+                        "%s Movie Theater", party.getRepresentative(),
+                        party.getSize(), party.getDesiredMovie());
+            }
+        }
     }
     
     

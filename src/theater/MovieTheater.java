@@ -60,4 +60,8 @@ public class MovieTheater {
         return seats.removeParty(representative);
     }
 
+    public int seatParty(Party party) {
+        return seats.seatParty(party);
+    }
+
 }

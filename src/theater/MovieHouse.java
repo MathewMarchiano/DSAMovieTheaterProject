@@ -167,17 +167,45 @@ public class MovieHouse {
         if (iterator == null) {
             throw new ValueException("Iterator has not been initialized!");
         }
-        return iterator.next().getNextParty();
+        Line line = iterator.next();
+        Line start = line;
+        Party party;
+        Party result = null;
+        do {
+            party = line.getNextParty();
+            if (party != null) {
+                result = party;
+                break;
+            }
+            line = iterator.next();
+        } while (line != start);
+        return result;
     }
 
     // Builds an iterator starting with the line specified
     public Party getNextCustomer(String lineName) {
         this.iterator = lines.iterator();
-        Line result = iterator.next();
-        while (!result.getName().equals(lineName)) {
-            result = iterator.next();
+        Line line = iterator.next();
+        while (!line.getName().equals(lineName)) {
+            line = iterator.next();
         }
-        return iterator.next().getNextParty();
+        Line start = line;
+        Party result = null;
+        Party party = null;
+        do {
+            party = line.getNextParty();
+            if (party != null) {
+                result = party;
+                break;
+            }
+            line = iterator.next();
+        } while (line != start);
+
+        return result;
+    }
+
+    public boolean hasIterator() {
+        return iterator != null;
     }
 
 }
