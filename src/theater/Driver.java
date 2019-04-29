@@ -47,11 +47,11 @@ public class Driver {
                 seatsPerRow, ticketPrice));
         
         // Add lines to the movie house
-        house.addLine(new Line(false));
-        house.addLine(new Line(false));
-        house.addLine(new Line(true));
-        house.addLine(new Line(true));
-        
+        // Per instructions: 2 regular and 1 express lines
+        house.addLine(new Line("Reg1", false));
+        house.addLine(new Line("Reg2", false));
+        house.addLine(new Line("Exp1", true));
+
         house.setFirstExpressLine();
 
         boolean running = true;
@@ -66,22 +66,20 @@ public class Driver {
 
             switch (selection) {
                 case 0:
-                    // TODO
-                    // needs to report sales and kick out customers.
-                	System.out.println("The Wonderful Movie Theater who earned $" + 
-                				      house.getTotalRevenue() + " kicks out remaining "
-                				      + "customers and closes...\n" +
-                				      "Good Bye!");
+                    house.close();
+                    System.out.println("Everyone has been kicked out of the " +
+                            "Movie House. Final Report:");
+                    house.reportSales();
                 	running = false;
                     break;
                 case 1:
                     customerEnters(house);
                     break;
                 case 2:
-                    //
+                    customerBuys(house);
                     break;
                 case 3:
-                    //
+                    customerLeaves(house);
                     break;
                 case 4:
                     displayLineInfo(house);
@@ -90,10 +88,10 @@ public class Driver {
                     house.getTheater("Shazam!").displaySeats();
                     break;
                 case 6:
-                    //
+                    house.getTheater("Dumbo").displaySeats();
                     break;
                 case 7:
-                    //
+                    house.reportSales();
                     break;
             }
         }
@@ -163,6 +161,71 @@ public class Driver {
     	System.out.println("Customer " + name + " is in " +
     						"ticket line.");
 
+    }
+
+    private static void customerLeaves(MovieHouse house) {
+        System.out.print("Enter customer name: ");
+        String name = stdin.next().trim();
+        System.out.println(name);
+
+        boolean result = house.removePartyFromTheaters(name);
+        if (result) {
+            System.out.printf("Customer %s has left the Movie Theater\n",
+                    name);
+        } else {
+            System.out.println("This customer is not in the Movie Theater!");
+        }
+
+    }
+
+    private static void customerBuys(MovieHouse house) {
+        Party party = null;
+        if (!house.hasIterator()) {
+            System.out.println("Which line would you like to serve first? ");
+            String lineName = stdin.next().trim();
+            System.out.println(lineName);
+            party = house.getNextCustomer(lineName);
+        } else {
+            party = house.getNextCustomer();
+        }
+        if (party == null){
+            System.out.println("There are no customers in the movie house " +
+                    "at the moment");
+        } else {
+            MovieTheater theater = house.getTheater(party.getDesiredMovie());
+            int seatIndex = theater.seatParty(party);
+            if (seatIndex == -1) {
+                System.out.println("Movie cannot seat your party.\n" +
+                        "Did you want to watch the other movie?");
+                String response = stdin.next().trim().toUpperCase();
+                if (response.equals("Y")) {
+                    String otherMovieTitle;
+                    if (party.getDesiredMovie().equals("Dumbo")) {
+                        otherMovieTitle = "Shazam!";
+                    } else {
+                        otherMovieTitle = "Dumbo";
+                    }
+                    seatIndex = house.getTheater(otherMovieTitle)
+                            .seatParty(party);
+                    if (seatIndex == -1) {
+                        System.out.println("Sorry we could not seat you there " +
+                                "either. Have a nice day.");
+                    } else {
+                        System.out.printf("%s party of %d has been seated in " +
+                                "the %s Movie Theater", party.getRepresentative(),
+                                party.getSize(), otherMovieTitle);
+                        house.getTheater(otherMovieTitle).incrementSale(party.getSize());
+                    }
+                } else {
+                    System.out.println("Thank you have a nice day.");
+                }
+            } else {
+                System.out.printf("%s party of %d has been seated in the " +
+                        "%s Movie Theater", party.getRepresentative(),
+                        party.getSize(), party.getDesiredMovie());
+                house.getTheater(party.getDesiredMovie()).incrementSale(party.getSize());
+            }
+        }
     }
     
     

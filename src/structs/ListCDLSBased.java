@@ -12,7 +12,7 @@ package structs;
 
 public class ListCDLSBased<T> implements ListInterface<T> {
 
-    private DNode<T> head;
+    protected DNode<T> head;
     private int numItems;
 
     public ListCDLSBased() {
@@ -161,4 +161,7 @@ public class ListCDLSBased<T> implements ListInterface<T> {
 
     }
 
+    public java.util.Iterator iterator() {
+        return new ListCDLSBasedIterator(this);
+    }
 }
