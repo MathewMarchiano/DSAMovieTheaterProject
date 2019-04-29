@@ -129,8 +129,8 @@ public class Driver {
             if (line.isEmpty()) {
                 System.out.println("No customers in line " + (index + 1));
             } else {
-                String expressString = line.getIsExpress() ? "Express" : "\n";
-                System.out.printf("%s Line #%d\n" +
+                String expressString = line.getIsExpress() ? "Express" : "";
+                System.out.printf("\n%s Line #%d\n" +
                         "----------\n", expressString, index + 1);
                 System.out.println(line.toString());
             }
