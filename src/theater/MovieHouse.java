@@ -103,6 +103,7 @@ public class MovieHouse {
         Iterator<Line> iterator = lines.iterator();
         Line line = iterator.next();
         Line minLine = line;
+        Line start = line;
         do {
             if (!line.getIsExpress() || (party.getHasKids())) {
                 if (line.getNumParties() < minSize ||
@@ -111,7 +112,8 @@ public class MovieHouse {
                     minLine = line;
                 }
             }
-        } while (iterator.hasNext());
+            line = iterator.next();
+        } while (iterator.hasNext() || line != start);
 
         minLine.addParty(party);
     }
